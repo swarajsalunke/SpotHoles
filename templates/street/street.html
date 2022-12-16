@@ -1,0 +1,57 @@
+<html>
+  <head>
+    <title>Street View</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <!-- playground-hide -->
+    <script>
+      const process = { env: {} };
+      process.env.GOOGLE_MAPS_API_KEY =
+        "AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg";
+    </script>
+    <!-- playground-hide-end -->
+
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+
+    <link href="{{url_for('static', filename = 'css/street.css')}}" rel="stylesheet">
+
+    <script type="module" src="./index.js"></script>
+    
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="pano"></div>
+
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3cImlKOCldEZPJfvIBXOKeSsAjA5V200&callback=initialize&v=weekly"
+      defer
+    ></script>
+
+    <script type="text/javascript">
+      function initialize() {
+        var latitude = '{{ lati }}'
+        var longitude = '{{ long }}'
+        const fenway = { lat: Number(latitude), lng: Number(longitude) };
+        const map = new google.maps.Map(document.getElementById("map"), {
+          center: fenway,
+          zoom: 14,
+        });
+        const panorama = new google.maps.StreetViewPanorama(
+          document.getElementById("pano"),
+          {
+            position: fenway,
+            pov: {
+              heading: 34,
+              pitch: 10,
+            },
+          }
+        );
+        
+        map.setStreetView(panorama);
+    }   
+
+  window.initialize = initialize;
+    </script>
+
+
+  </body>
+</html>
