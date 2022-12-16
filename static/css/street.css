@@ -1,0 +1,15 @@
+html,
+body {
+  height: 80%;
+  margin: 0;
+  padding: 0;
+}
+
+#map{
+  width: 0%;
+  height: 0%;
+}
+#pano {
+  height: 939px;
+  width: 100%;
+}
